@@ -1,4 +1,5 @@
 import express from "express";
+import homeController from '../controller/homeController'
 
 const router = express.Router();
 
@@ -8,9 +9,8 @@ const router = express.Router();
  */
 
 const initWebRouters = (app) => {
-    router.get("/", (req, res) => {
-        return res.send("Hello world")
-    });
+    router.get("/", homeController.HandleHelloWorld);
+    router.get("/user", homeController.HandleUserPage);
     return app.use("/", router); // Sử dụng app.use() thay vì app.user()
 };
 
