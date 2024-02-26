@@ -5,9 +5,10 @@ const HandleHelloWorld = (req, res) => {
     return res.render("home.ejs", { name })
 }
 
-const HandleUserPage = (req, res) => {
-    let name = "Bảo DZ Pro"
-    return res.render("user.ejs", { name })
+const HandleUserPage = async (req, res) => {
+    let userList = await userService.getUserList();
+
+    return res.render("user.ejs", { userList })
 }
 
 const HandleCreateNewUser = async (req, res) => {

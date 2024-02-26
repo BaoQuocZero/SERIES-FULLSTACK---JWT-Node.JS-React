@@ -3,3 +3,4 @@
 - npm install --save-exact @babel/core@7.15.4 @babel/node@7.15.4 @babel/preset-env@7.15.4 nodemon@2.0.15
 - npm install --save-exact mysql2@2.3.3
 - npm install --save-exact bcryptjs@2.4.3
+- npm install --save-exact bluebird@3.7.2
