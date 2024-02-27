@@ -9,17 +9,25 @@ const hashPassword = (userPassword) => {
     return hashPassword;
 }
 
-const createNewUser = (email, password, username) => {
+const createNewUser = async (email, password, username) => {
     let hashPass = hashPassword(password);
 
-    connection.query(
-        'INSERT INTO users (email, password, username) VALUES (?, ?, ?)', [email, hashPass, username],
-        function (err, results, fields) {
-            if (err) {
-                console.log(err)
-            }
-        }
-    );
+    const connection = await mysql.createConnection({
+        host: 'localhost',
+        user: 'root',
+        database: 'jwt',
+        Promise: bluebỉd
+    });
+
+    try {
+        const [rows, fields] = await connection.execute(
+            'INSERT INTO users (email, password, username) VALUES (?, ?, ?)', [email, hashPass, username],
+        );
+        return rows;
+    }
+    catch (err) {
+        console.log("Err createNewUser >>>> ", err)
+    }
 }
 
 const getUserList = async () => {
@@ -32,21 +40,9 @@ const getUserList = async () => {
         Promise: bluebỉd
     });
 
-    // return connection.query(
-    //     'SELECT * FROM users',
-    //     function (err, results, fields) {
-    //         if (err) {
-    //             console.log(err)
-    //             return users;
-    //         }
-    //         users = results
-    //         return users
-    //     }
-    // );
-
     try {
         const [rows, fields] = await connection.execute(
-            'SELECT * FROM users'
+            'SELECT * FROM users ORDER BY id DESC'
         );
         return rows;
     }
@@ -55,7 +51,29 @@ const getUserList = async () => {
     }
 }
 
+const deleteUser = async (id) => {
+
+    // Create the connection to database
+    const connection = await mysql.createConnection({
+        host: 'localhost',
+        user: 'root',
+        database: 'jwt',
+        Promise: bluebỉd
+    });
+
+    try {
+        const [rows, fields] = await connection.execute(
+            'DELETE FROM users WHERE id = ?', [id]
+        );
+        return rows;
+    }
+    catch (err) {
+        console.log("Err deleteUser >>>> ", err)
+    }
+}
+
 module.exports = {
     createNewUser,
-    getUserList
+    getUserList,
+    deleteUser
 }

@@ -13,6 +13,7 @@ const initWebRouters = (app) => {
     router.get("/user", homeController.HandleUserPage);
 
     router.post("/user/create-user", homeController.HandleCreateNewUser)
+    router.post("/delete-user/:id", homeController.HandleDeleteUser)
 
     return app.use("/", router); // Sử dụng app.use() thay vì app.user()
 };
