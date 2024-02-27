@@ -68,7 +68,9 @@
                                     <%= item.username %>
                                 </td>
                                 <td>
-                                    <button class="btn btn-warning">Edit</button>
+                                    <a class="btn btn-warning" href="/update-user/<%= item.id %>">
+                                        Edit
+                                    </a>
                                     <form style="display: inline;" action="/delete-user/<%= item.id %>" method="POST">
                                         <button class="btn btn-danger" type="submit">Delete</button>
                                     </form>
