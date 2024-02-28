@@ -1,5 +1,5 @@
 import express from "express";
-import configViewEngine from "./configs/viewEngine";
+import configViewEngine from "./config/viewEngine";
 import initWebRouters from "./routes/web.js";
 import bodyParser from "body-parser"
 require("dotenv").config();

@@ -4,3 +4,4 @@
 - npm install --save-exact mysql2@2.3.3
 - npm install --save-exact bcryptjs@2.4.3
 - npm install --save-exact bluebird@3.7.2
+- npm install --save-exact sequelize@6.13.0 sequelize-cli@6.3.0
