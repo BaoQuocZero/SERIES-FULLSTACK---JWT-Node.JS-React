@@ -21,7 +21,7 @@ const createNewUser = async (email, password, username) => {
 
     try {
         const [rows, fields] = await connection.execute(
-            'INSERT INTO users (email, password, username) VALUES (?, ?, ?)', [email, hashPass, username],
+            'INSERT INTO user (email, password, username) VALUES (?, ?, ?)', [email, hashPass, username],
         );
         return rows;
     }
@@ -31,7 +31,7 @@ const createNewUser = async (email, password, username) => {
 }
 
 const getUserList = async () => {
-    let users = [];
+    let user = [];
     // Create the connection to database
     const connection = await mysql.createConnection({
         host: 'localhost',
@@ -42,7 +42,7 @@ const getUserList = async () => {
 
     try {
         const [rows, fields] = await connection.execute(
-            'SELECT * FROM users ORDER BY id DESC'
+            'SELECT * FROM user ORDER BY id DESC'
         );
         return rows;
     }
@@ -63,7 +63,7 @@ const deleteUser = async (id) => {
 
     try {
         const [rows, fields] = await connection.execute(
-            'DELETE FROM users WHERE id = ?', [id]
+            'DELETE FROM user WHERE id = ?', [id]
         );
         return rows;
     }
@@ -84,7 +84,7 @@ const getUserById = async (id) => {
 
     try {
         const [rows, fields] = await connection.execute(
-            'SELECT * FROM users WHERE id = ?', [id]
+            'SELECT * FROM user WHERE id = ?', [id]
         );
         return rows;
     }
@@ -105,7 +105,7 @@ const updateUserInfo = async (email, username, id) => {
 
     try {
         const [rows, fields] = await connection.execute(
-            'UPDATE users SET email = ?, username = ? WHERE id = ?', [email, username, id]
+            'UPDATE user SET email = ?, username = ? WHERE id = ?', [email, username, id]
         );
         return rows;
     }
