@@ -1,6 +1,7 @@
 import mysql from 'mysql2/promise';
 import bcrypt, { hash } from 'bcryptjs'
 import bluebỉd from 'bluebird'
+import db from '../models/index'
 
 const salt = bcrypt.genSaltSync(10);
 
@@ -12,18 +13,12 @@ const hashPassword = (userPassword) => {
 const createNewUser = async (email, password, username) => {
     let hashPass = hashPassword(password);
 
-    const connection = await mysql.createConnection({
-        host: 'localhost',
-        user: 'root',
-        database: 'jwt',
-        Promise: bluebỉd
-    });
-
     try {
-        const [rows, fields] = await connection.execute(
-            'INSERT INTO user (email, password, username) VALUES (?, ?, ?)', [email, hashPass, username],
-        );
-        return rows;
+        await db.User.create({
+            username: username,
+            email: email,
+            password: hashPass
+        })
     }
     catch (err) {
         console.log("Err createNewUser >>>> ", err)
