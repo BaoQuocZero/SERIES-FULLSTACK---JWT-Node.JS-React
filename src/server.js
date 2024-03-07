@@ -1,7 +1,7 @@
 import express from "express";
 import configViewEngine from "./config/viewEngine";
 import initWebRouters from "./routes/web.js";
-import bodyParser from "body-parser"
+import bodyParser from "body-parser";
 //import connection from './config/connectDB.js'
 require("dotenv").config();
 
