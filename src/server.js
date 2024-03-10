@@ -3,7 +3,7 @@ import configViewEngine from "./config/viewEngine";
 import initWebRouters from "./routes/web.js";
 import bodyParser from "body-parser"
 //import connection from './config/connectDB.js'
-require("dotenv").config()
+require("dotenv").config();
 
 const app = express();
 const PORT = process.env.PORT || 8080;
