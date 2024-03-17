@@ -5,3 +5,6 @@
 - npm install --save-exact bcryptjs@2.4.3
 - npm install --save-exact bluebird@3.7.2
 - npm install --save-exact sequelize@6.13.0 sequelize-cli@6.3.0
+- npx create-react-app my-app
+- npm install --save-exact sass@1.48.0
+- npm install --save-exact react-router-dom@5.3.0
