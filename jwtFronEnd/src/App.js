@@ -1,5 +1,6 @@
 import './components/App.scss';
 import Nav from './components/Navigation/Nav.js';
+import Login from './components/Login/Login.js';
 import {
   BrowserRouter as Router,
   Switch,
@@ -21,8 +22,14 @@ function App() {
           <Route path="/contact">
             Contact
           </Route>
-          <Route path="/">
+          <Route path="/login">
+            <Login />
+          </Route>
+          <Route path="/" exact>
             Home
+          </Route>
+          <Route path="*">
+            404 not found
           </Route>
         </Switch>
       </div>
