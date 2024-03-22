@@ -12,7 +12,7 @@ const Login = () => {
                             Hoi dan it
                         </div>
                         <div className='detail'>
-                            Ẻitnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn
+                            Mọi khóa học trên Udemy, mình sẽ không pubic mà chuyển qua private, bạn nào quan tâm về khóa Fullstack JWT (json web token), Node.js và React thì:
                         </div>
                     </div>
 
