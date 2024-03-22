@@ -6,7 +6,8 @@ const Login = () => {
         <div className='login-container mt-3'>
             <div className='container'>
                 <div className='row'>
-                    <div className='content-left col-7'>
+
+                    <div className='content-left col-7 d-none d-sm-block'>
                         <div className='brand'>
                             Hoi dan it
                         </div>
@@ -14,7 +15,8 @@ const Login = () => {
                             Ẻitnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn
                         </div>
                     </div>
-                    <div className='content-right col-5 d-flex flex-column gap-3 py-3'>
+
+                    <div className='content-right col-10 col-sm-5 d-flex flex-column gap-3 py-3'>
                         <input type='text' className='form-control' placeholder='Email address or phone number' />
                         <input type='password' className='form-control' placeholder='Password' />
                         <button className='btn btn-primary'>Login</button>
@@ -24,6 +26,7 @@ const Login = () => {
                             <button className='btn btn-success'>Create new accourt</button>
                         </div>
                     </div>
+
                 </div>
             </div>
         </div>
