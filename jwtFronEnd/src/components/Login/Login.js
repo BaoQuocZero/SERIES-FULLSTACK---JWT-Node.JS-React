@@ -1,7 +1,14 @@
 import React from 'react';
 import './Login.scss';
 
+import { useHistory } from 'react-router-dom';
+
 const Login = () => {
+    let history = useHistory();
+    const handleCreateNewAccout = () => {
+        history.push("/register")
+    }
+
     return (
         <div className='login-container '>
             <div className='container'>
@@ -29,7 +36,9 @@ const Login = () => {
                         </span>
                         <hr />
                         <div className='text-center'>
-                            <button className='btn btn-success'>Create new accourt</button>
+                            <button className='btn btn-success' onClick={() => handleCreateNewAccout()}>
+                                Create new accourt
+                            </button>
                         </div>
                     </div>
 
