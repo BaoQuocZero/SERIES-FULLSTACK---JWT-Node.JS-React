@@ -12,3 +12,4 @@
 - npm install --save-exact react-router-dom@5.3.0
 - npm install --save-exact bootstrap@5.1.3
 - npm install --save-exact axios@0.25.0
+- npm install --save-exact react-toastify@8.1.0
