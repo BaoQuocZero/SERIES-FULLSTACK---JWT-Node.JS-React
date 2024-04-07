@@ -27,9 +27,10 @@ const Register = () => {
     }
 
     useEffect(() => {
-        // axios.get("http://localhost:8080/api/test-api").then(data => {
+        // axios.get("http://localhost:8080/api/v1/test-api").then(data => {
         //     console.log(">>>", data)
         // })
+
     }, []);
 
     const isValidinputs = () => {
@@ -72,8 +73,10 @@ const Register = () => {
     const handleRegister = () => {
 
         let check = isValidinputs();
-
-        let userData = { email, phone, username, password }
+        if (check === true)
+            axios.post("http://localhost:8080/api/v1/register", {
+                email, phone, username, password
+            })
     }
 
     return (
