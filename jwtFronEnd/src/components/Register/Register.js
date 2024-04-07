@@ -12,6 +12,14 @@ const Register = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
+    const defaultValidInput = {
+        isValidEmail: true,
+        isValidPhone: true,
+        isValidiPassword: true,
+        isValidConfirmPassword: true
+    }
+
+    const [objCheckInput, setObjCheckInput] = useState(defaultValidInput)
 
     let history = useHistory();
     const handleLogin = () => {
@@ -25,29 +33,36 @@ const Register = () => {
     }, []);
 
     const isValidinputs = () => {
+        setObjCheckInput(defaultValidInput);
+
         if (!email) {
             toast.error("Email is required");
-            return false;
-        }
-
-        if (!phone) {
-            toast.error("Phone is required");
-            return false;
-        }
-
-        if (!password) {
-            toast.error("Password is required");
-            return false;
-        }
-
-        if (password != confirmPassword) {
-            toast.error("Your password is not the same");
+            setObjCheckInput({ ...defaultValidInput, isValidEmail: false });
             return false;
         }
 
         let regx = /\S+@\S+\.\S+/;
         if (!regx.test(email)) {
             toast.error("Please enter a vaild email address");
+            setObjCheckInput({ ...defaultValidInput, isValidEmail: false });
+            return false;
+        }
+
+        if (!phone) {
+            toast.error("Phone is required");
+            setObjCheckInput({ ...defaultValidInput, isValidPhone: false });
+            return false;
+        }
+
+        if (!password) {
+            toast.error("Password is required");
+            setObjCheckInput({ ...defaultValidInput, isValidiPassword: false });
+            return false;
+        }
+
+        if (password !== confirmPassword) {
+            toast.error("Your password is not the same");
+            setObjCheckInput({ ...defaultValidInput, isValidConfirmPassword: false });
             return false;
         }
 
@@ -59,7 +74,6 @@ const Register = () => {
         let check = isValidinputs();
 
         let userData = { email, phone, username, password }
-        console.log(">>>>>", userData)
     }
 
     return (
@@ -83,25 +97,25 @@ const Register = () => {
 
                         <div className='form-group'>
                             <label>Email: </label>
-                            <input type='email' className='form-control' placeholder='Email address'
+                            <input type='email' className={objCheckInput.isValidEmail ? 'form-control' : 'form-control is-invalid'} placeholder='Email address'
                                 value={email} onChange={(event) => setEmail(event.target.value)}
                             />
                         </div>
                         <div className='form-group'>
                             <label>Phone number: </label>
-                            <input type='text' className='form-control' placeholder='Phone number'
+                            <input type='text' className={objCheckInput.isValidPhone ? 'form-control' : 'form-control is-invalid'} placeholder='Phone number'
                                 value={phone} onChange={(event) => setPhone(event.target.value)}
                             />
                         </div>
                         <div className='form-group'>
                             <label>Password: </label>
-                            <input type='password' className='form-control' placeholder='Password'
+                            <input type='password' className={objCheckInput.isValidiPassword ? 'form-control' : 'form-control is-invalid'} placeholder='Password'
                                 value={password} onChange={(event) => setPassword(event.target.value)}
                             />
                         </div>
                         <div className='form-group'>
                             <label>Re Enter Password: </label>
-                            <input type='password' className='form-control' placeholder='Re Enter Password'
+                            <input type='password' className={objCheckInput.isValidConfirmPassword ? 'form-control' : 'form-control is-invalid'} placeholder='Re Enter Password'
                                 value={confirmPassword} onChange={(event) => setConfirmPassword(event.target.value)}
                             />
                         </div>
