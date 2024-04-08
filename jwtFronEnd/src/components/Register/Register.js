@@ -111,6 +111,12 @@ const Register = () => {
                             />
                         </div>
                         <div className='form-group'>
+                            <label>User name: </label>
+                            <input type='text' className={objCheckInput.isValidPhone ? 'form-control' : 'form-control is-invalid'} placeholder='Phone number'
+                                value={username} onChange={(event) => setUsername(event.target.value)}
+                            />
+                        </div>
+                        <div className='form-group'>
                             <label>Password: </label>
                             <input type='password' className={objCheckInput.isValidiPassword ? 'form-control' : 'form-control is-invalid'} placeholder='Password'
                                 value={password} onChange={(event) => setPassword(event.target.value)}
