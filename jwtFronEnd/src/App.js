@@ -1,9 +1,5 @@
 import './components/App.scss';
 
-import Nav from './components/Navigation/Nav.js';
-import Login from './components/Login/Login.js';
-import Register from './components/Register/Register.js';
-
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -13,12 +9,31 @@ import {
   Route
 } from "react-router-dom";
 
+import Nav from './components/Navigation/Nav.js';
+import Login from './components/Login/Login.js';
+import Register from './components/Register/Register.js';
+import Users from './components/manageUsers/Users.js';
+import { useEffect, useState } from 'react';
+import _ from 'lodash'
+
 function App() {
+  const [account, setAccount] = useState({})
+
+  useEffect(() => {
+    let session = sessionStorage.getItem("account");
+    if (session) {
+      setAccount(JSON.parse(session))
+    }
+  }, [])
   return (
     <>
       <Router>
         <div className='app-container'>
-          {/* <Nav /> */}
+
+          {account && !_.isEmpty(account) && account.isAuthenticated
+            && <Nav />
+          }
+
           <Switch>
             <Route path="/news">
               News
@@ -35,6 +50,11 @@ function App() {
             <Route path="/register">
               <Register />
             </Route>
+            <Route path="/users">
+              <Users />
+            </Route>
+
+
             <Route path="/" exact>
               Home
             </Route>
