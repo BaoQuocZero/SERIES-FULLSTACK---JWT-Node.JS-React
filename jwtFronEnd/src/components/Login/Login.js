@@ -1,6 +1,7 @@
 import React, { isValidElement, useState } from 'react';
 import './Login.scss';
 
+import { useEffect } from "react";
 import { useHistory } from 'react-router-dom';
 import { toast } from 'react-toastify'
 import { loginUser } from '../../services/userServices';
@@ -64,6 +65,14 @@ const Login = () => {
             hanleLogin();
         }
     }
+
+    useEffect(() => {
+        let session = sessionStorage.getItem("account");
+        if (session) {
+            history.push("/")
+            window.location.reload()
+        }
+    }, [])
 
     return (
         <div className='login-container '>
