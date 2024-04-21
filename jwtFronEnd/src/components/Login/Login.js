@@ -46,6 +46,7 @@ const Login = () => {
             }
             sessionStorage.setItem("account", JSON.stringify(data));
             history.push('/users')
+            window.location.reload();
         }
 
         if (response && response.data && +response.data.EC !== 0) {
@@ -54,6 +55,14 @@ const Login = () => {
         }
 
         console.log(">>>>>>> response :", response.data)
+    }
+
+    const handlePressEnter = (event) => {
+
+
+        if (event.keyCode === 13 && event.code === "Enter") {
+            hanleLogin();
+        }
     }
 
     return (
@@ -88,6 +97,7 @@ const Login = () => {
                             placeholder='Password'
                             value={password}
                             onChange={(event) => { setPassword(event.target.value) }}
+                            onKeyDown={(event) => handlePressEnter(event)}
                         />
                         <button className='btn btn-primary' onClick={() => hanleLogin()}>Login</button>
                         <span className='text-center'>
