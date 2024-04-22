@@ -1,5 +1,6 @@
 import express from "express";
 import apiController from '../controller/apiController';
+import userControler from '../controller/userController'
 
 const router = express.Router();
 
@@ -14,6 +15,11 @@ const initApiRouters = (app) => {
 
     router.post("/register", apiController.handleRegister);
     router.post("/login", apiController.handlelogin);
+
+    router.get("/user/read", userControler.readFunc);
+    router.post("/user/create", userControler.createFunc)
+    router.put("/user/update", userControler.updateFunc)
+    router.delete("/user/delete", userControler.deleteFunc)
 
     return app.use("/api/v1/", router); // Sử dụng app.use() thay vì app.user()
 };
