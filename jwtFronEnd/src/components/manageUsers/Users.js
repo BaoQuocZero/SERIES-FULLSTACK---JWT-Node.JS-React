@@ -1,8 +1,10 @@
 import './Users.scss'
 
 import { useState, useEffect } from 'react'
-import { fetchAllUser } from '../../services/userServices';
+import { fetchAllUser, deleteUser } from '../../services/userServices';
 import ReactPaginate from 'react-paginate';
+import { toast } from 'react-toastify'
+import ModalDelete from './ModalDelete';
 
 const Users = (props) => {
 
@@ -11,6 +13,9 @@ const Users = (props) => {
     const [currentLimit, setCurrentLimit] = useState(3);
     const [totalPages, setTotalPages] = useState(0);
 
+    const [isShowModalDelete, setIsShowModalDelete] = useState(false)
+    const [dataModal, setDataModal] = useState({});
+
     useEffect(() => {
         fetchUsers()
     }, [currentPage])
@@ -18,7 +23,6 @@ const Users = (props) => {
     const fetchUsers = async () => {
         let response = await fetchAllUser(currentPage, currentLimit)
         if (response && response.data && response.data.EC === 0) {
-            console.log(response.data.DT)
             setTotalPages(response.data.DT.totalPages)
             setListUsers(response.data.DT.users)
         }
@@ -28,6 +32,27 @@ const Users = (props) => {
         setCurrentPage(+event.selected + 1)
         // await fetchUsers(+event.selected + 1);
     };
+
+    const handleDeleteItem = async (user) => {
+        setDataModal(user)
+        setIsShowModalDelete(true)
+    }
+
+    const handleClose = () => {
+        setIsShowModalDelete(false)
+        setDataModal({})
+    }
+
+    const confirmDeleteUser = async () => {
+        let response = await deleteUser(dataModal)
+        if (response && response.data.EC === 0) {
+            toast.success(response.data.EM)
+            await fetchUsers();
+            setIsShowModalDelete(false)
+        } else {
+            toast.error(response.data.EM)
+        }
+    }
 
     return (
         <>
@@ -67,8 +92,10 @@ const Users = (props) => {
                                                     <td>{item.username}</td>
                                                     <td>{item.Group ? item.Group.name : ''}</td>
                                                     <th>
-                                                        <button className='btn btn-warning'>Edit</button>
-                                                        <button className='btn btn-danger'>Delete</button>
+                                                        <button className='btn btn-warning mx-3'>Edit</button>
+                                                        <button className='btn btn-danger'
+                                                            onClick={() => handleDeleteItem(item)}
+                                                        >Delete</button>
                                                     </th>
                                                 </tr>
                                             )
@@ -116,6 +143,13 @@ const Users = (props) => {
 
                 </div>
             </div>
+
+            <ModalDelete
+                show={isShowModalDelete}
+                handleClose={handleClose}
+                confirmDeleteUser={confirmDeleteUser}
+                dataModal={dataModal}
+            />
         </>
     )
 }
