@@ -68,11 +68,19 @@ const getUserWithPagination = async (page, limit) => {
 
 const createNewUser = async (data) => {
     try {
-        await db.User.create({
-
-        })
+        await db.User.create(data)
+        return {
+            EM: "Create ok", //error mesage
+            EC: 0, //error code
+            DT: [] //data
+        }
     } catch (error) {
         console.log(error)
+        return {
+            EM: 'something wrongs with service',
+            EC: 1,
+            DT: []
+        }
     }
 }
 
