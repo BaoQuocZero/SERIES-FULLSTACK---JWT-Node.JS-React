@@ -85,8 +85,11 @@ const ModalUser = (props) => {
             if (res.data && res.data.EC === 0) {
                 props.onHide()
                 setUserData({ ...defaultUserData, group: userGroups[0].id })
-            } else {
-                toast.error(`Error create user ...`)
+            } if (res.data && res.data.EC !== 0) {
+                toast.error(`Error create user: "${res.data.EM}"`)
+                let _validInputs = _.cloneDeep(validInputsDefault)
+                _validInputs[res.data.DT] = false;
+                setValidInputs(_validInputs)
             }
         }
     }
