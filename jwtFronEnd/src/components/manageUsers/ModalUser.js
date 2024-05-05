@@ -8,6 +8,8 @@ import _ from 'lodash'
 
 const ModalUser = (props) => {
 
+    const { action, dataModalUser } = props
+
     const defaultUserData = {
         email: "",
         phone: "",
@@ -32,9 +34,19 @@ const ModalUser = (props) => {
     const [userData, setUserData] = useState(defaultUserData)
 
     const [userGroups, setUserGroups] = useState([])
+
     useEffect(() => {
         getGroup()
+        if (action === "UPDATE") {
+            setUserData(dataModalUser)
+        }
     }, [])
+
+    useEffect(() => {
+        if (action === "UPDATE") {
+            setUserData({ ...dataModalUser, group: dataModalUser.Group ? dataModalUser.Group.id : '' })
+        }
+    }, [dataModalUser])
 
     const getGroup = async () => {
         let res = await fetchGroup();
@@ -99,64 +111,87 @@ const ModalUser = (props) => {
             <Modal size="lg" show={props.show} className='modal-user' onHide={props.onHide}>
                 <Modal.Header closeButton>
                     <Modal.Title id="contained-modal-title-vcenter">
-                        <span>{props.title}</span>
+                        <span>{props.action === "CREATE" ? 'Create new user' : 'Edit a user'}</span>
                     </Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <div className='Content-body row'>
+
+
                         <div className='col-12 col-sm-6 form-group'>
                             <label>Email adress:(<span className='red'>*</span>)</label>
                             <input
+                                disabled={action === "CREATE" ? false : true}
                                 className={validInputs.email ? 'form-control' : 'form-control is-invalid'}
                                 type='email' value={userData.email}
                                 onChange={(event) => handleOnChangeInput(event.target.value, "email")}
                             />
                         </div>
+
+
                         <div className='col-12 col-sm-6 form-group'>
                             <label>Phone number:(<span className='red'>*</span>)</label>
                             <input
+                                disabled={action === "CREATE" ? false : true}
                                 className={validInputs.phone ? 'form-control' : 'form-control is-invalid'}
                                 type='text' value={userData.phone}
                                 onChange={(event) => handleOnChangeInput(event.target.value, "phone")}
                             />
                         </div>
+
+
                         <div className='col-12 col-sm-6 form-group'>
                             <label>UserName:</label>
                             <input className='form-control' type='text' value={userData.username}
                                 onChange={(event) => handleOnChangeInput(event.target.value, "username")}
                             />
                         </div>
+
+
                         <div className='col-12 col-sm-6 form-group'>
-                            <label>Password:(<span className='red'>*</span>)</label>
-                            <input
-                                className={validInputs.password ? 'form-control' : 'form-control is-invalid'}
-                                type='password'
-                                value={userData.password}
-                                onChange={(event) => handleOnChangeInput(event.target.value, "password")}
-                            />
+                            {action === "CREATE"
+                                &&
+                                <>
+                                    <label>Password:(<span className='red'>*</span>)</label>
+                                    <input
+                                        className={validInputs.password ? 'form-control' : 'form-control is-invalid'}
+                                        type='password'
+                                        value={userData.password}
+                                        onChange={(event) => handleOnChangeInput(event.target.value, "password")}
+                                    />
+                                </>
+                            }
                         </div>
+
+
                         <div className='col-12 col-sm-12 form-group'>
                             <label>Address:</label>
                             <input className='form-control' type='text' value={userData.address}
                                 onChange={(event) => handleOnChangeInput(event.target.value, "address")}
                             />
                         </div>
+
+
                         <div className='col-12 col-sm-6 form-group'>
                             <label>Gender:</label>
                             <select
                                 className='form-select' type='text'
                                 onChange={(event) => handleOnChangeInput(event.target.value, "sex")}
+                                value={userData.sex}
                             >
                                 <option value={"Male"}>Male</option>
                                 <option defaultValue={"Female"}>Female</option>
                                 <option value={"Other"}>Other</option>
                             </select>
                         </div>
+
+
                         <div className='col-12 col-sm-6 form-group'>
                             <label>Groups:(<span className='red'>*</span>)</label>
                             <select
                                 className='form-select' type='text'
                                 onChange={(event) => handleOnChangeInput(event.target.value, "group")}
+                                value={userData.group}
                             >
                                 {userGroups.length > 0 &&
                                     userGroups.map((item, index) => {
@@ -167,6 +202,8 @@ const ModalUser = (props) => {
                                 }
                             </select>
                         </div>
+
+
                     </div>
                 </Modal.Body>
                 <Modal.Footer>
