@@ -61,9 +61,10 @@ const Users = (props) => {
         }
     }
 
-    const onHideModalUser = () => {
+    const onHideModalUser = async () => {
         setIsShowModalUser(false)
         setDataModalUser({})
+        await fetchUsers()
     }
 
     const handleEditUser = (user) => {
