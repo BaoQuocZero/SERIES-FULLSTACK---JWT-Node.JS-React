@@ -209,7 +209,7 @@ const ModalUser = (props) => {
                 <Modal.Footer>
                     <Button variant="secondary" onClick={props.onHide}>Close</Button>
                     <Button variant="primary" onClick={() => handleConfirmUser()}>
-                        Save
+                        {action === "CREATE" ? "Save" : "Update"}
                     </Button>
                 </Modal.Footer>
             </Modal>

@@ -63,6 +63,7 @@ const Users = (props) => {
 
     const onHideModalUser = () => {
         setIsShowModalUser(false)
+        setDataModalUser({})
     }
 
     const handleEditUser = (user) => {
@@ -81,7 +82,12 @@ const Users = (props) => {
                         </div>
                         <div className="actions">
                             <button className="btn btn-success">Refesh</button>
-                            <button className="btn btn-primary" onClick={() => setIsShowModalUser(true)}>Add new user</button>
+                            <button className="btn btn-primary"
+                                onClick={() => {
+                                    setIsShowModalUser(true);
+                                    setActionModalUser("CREATE")
+                                }}>
+                                Add new user</button>
                         </div>
                     </div>
 
