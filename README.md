@@ -16,3 +16,4 @@
 - npm install --save-exact lodash@4.17.21
 - npm install --save-exact react-paginate@8.1.0
 - npm install --save-exact react-bootstrap@2.1.1
+- npm install --save-exact font-awesome@4.7.0
