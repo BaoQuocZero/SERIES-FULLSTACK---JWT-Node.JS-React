@@ -29,9 +29,9 @@ const Users = (props) => {
 
     const fetchUsers = async () => {
         let response = await fetchAllUser(currentPage, currentLimit)
-        if (response && response.data && response.data.EC === 0) {
-            setTotalPages(response.data.DT.totalPages)
-            setListUsers(response.data.DT.users)
+        if (response && response.EC === 0) {
+            setTotalPages(response.DT.totalPages)
+            setListUsers(response.DT.users)
         }
     }
 
@@ -52,12 +52,12 @@ const Users = (props) => {
 
     const confirmDeleteUser = async () => {
         let response = await deleteUser(dataModal)
-        if (response && response.data.EC === 0) {
-            toast.success(response.data.EM)
+        if (response && response.EC === 0) {
+            toast.success(response.EM)
             await fetchUsers();
             setIsShowModalDelete(false)
         } else {
-            toast.error(response.data.EM)
+            toast.error(response.EM)
         }
     }
 
@@ -130,7 +130,7 @@ const Users = (props) => {
                                                             title='Edit'
                                                             className='edit'
                                                             onClick={() => handleEditUser(item)}>
-                                                            <i class="fa fa-pencil" aria-hidden="true"></i>
+                                                            <i className="fa fa-pencil" aria-hidden="true"></i>
                                                         </span>
                                                         <span
                                                             title='Delete'
