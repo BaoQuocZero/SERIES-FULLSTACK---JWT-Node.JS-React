@@ -7,6 +7,8 @@ import configCors from './config/cors.js'
 //import connection from './config/connectDB.js'
 require("dotenv").config();
 
+import { createJWT, veryfyToken } from "./middleware/JWTAction.js"
+
 const app = express();
 const PORT = process.env.PORT || 8080;
 
@@ -22,6 +24,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 //test connection
 //connection()
+
+//test
+let token = createJWT()
+let dataToken = veryfyToken(token)
+console.log(dataToken)
 
 initWebRouters(app);
 initApiRouters(app);

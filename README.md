@@ -17,3 +17,6 @@
 - npm install --save-exact react-paginate@8.1.0
 - npm install --save-exact react-bootstrap@2.1.1
 - npm install --save-exact font-awesome@4.7.0
+
+- npm install --save-exact jsonwebtoken@8.5.1 cookie-parser@1.4.6
+
