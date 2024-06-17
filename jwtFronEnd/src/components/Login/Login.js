@@ -54,8 +54,6 @@ const Login = () => {
             //error
             toast.error(response.EM)
         }
-
-        console.log(">>>>>>> response :", response.data)
     }
 
     const handlePressEnter = (event) => {
