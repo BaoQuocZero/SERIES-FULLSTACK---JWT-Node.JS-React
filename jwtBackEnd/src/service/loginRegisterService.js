@@ -1,3 +1,4 @@
+require('dotenv').config()
 import db from '../models/index'
 import bcrypt, { hash } from 'bcryptjs'
 import { Op } from 'sequelize';
@@ -101,7 +102,8 @@ const handleUserlogin = async (rawData) => {
                 let GroupWithRole = await GetGroupWithRole(user);
                 let payload = {
                     email: user.email,
-                    GroupWithRole
+                    GroupWithRole,
+                    expiresIn: process.env.JWT_EXPIRES_IN
                 }
 
                 let token = createJWT(payload)
