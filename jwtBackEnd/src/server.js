@@ -26,6 +26,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 initWebRouters(app);
 initApiRouters(app);
 
+
+app.use((req, res) => {
+    return res.send("404 not found")
+})
+
 app.listen(PORT, () => {
     console.log("JWT is runing on the port ", PORT)
 })
