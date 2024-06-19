@@ -26,7 +26,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 initWebRouters(app);
 initApiRouters(app);
 
-
+//req => middleware => res
 app.use((req, res) => {
     return res.send("404 not found")
 })
