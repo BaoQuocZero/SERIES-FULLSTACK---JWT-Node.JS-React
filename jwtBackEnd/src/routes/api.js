@@ -21,7 +21,7 @@ const initApiRouters = (app) => {
     router.get("/test-api", apiController.testApi);
 
     router.post("/register", apiController.handleRegister);
-    router.post("/login", testMiddleware, apiController.handlelogin);
+    router.post("/login", apiController.handlelogin);
 
     router.get("/user/read", userControler.readFunc);
     router.post("/user/create", userControler.createFunc)
