@@ -18,13 +18,6 @@ const testMiddleware = (req, res, next) => {
     next()
 }
 
-// const checkUserLogin = (req, res, next) => {
-//     const nonSecurePaths = ['/', '/register', '/login'];
-//     if (nonSecurePaths.includes(req.path)) return next();
-
-//     next();
-// }
-
 const initApiRouters = (app) => {
 
     router.post("/register", apiController.handleRegister);
