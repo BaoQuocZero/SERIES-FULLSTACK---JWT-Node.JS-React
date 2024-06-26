@@ -3,6 +3,8 @@ import apiController from '../controller/apiController';
 import userControler from '../controller/userController'
 import groupControler from '../controller/groupControler'
 
+import { checkUserJWT, checkUserPermission } from '../middleware/JWTAction'
+
 const router = express.Router();
 
 /**
@@ -16,14 +18,19 @@ const testMiddleware = (req, res, next) => {
     next()
 }
 
-const initApiRouters = (app) => {
+// const checkUserLogin = (req, res, next) => {
+//     const nonSecurePaths = ['/', '/register', '/login'];
+//     if (nonSecurePaths.includes(req.path)) return next();
 
-    router.get("/test-api", apiController.testApi);
+//     next();
+// }
+
+const initApiRouters = (app) => {
 
     router.post("/register", apiController.handleRegister);
     router.post("/login", apiController.handlelogin);
 
-    router.get("/user/read", userControler.readFunc);
+    router.get("/user/read", checkUserJWT, checkUserPermission, userControler.readFunc);
     router.post("/user/create", userControler.createFunc)
     router.put("/user/update", userControler.updateFunc)
     router.delete("/user/delete", userControler.deleteFunc)

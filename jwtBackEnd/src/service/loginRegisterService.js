@@ -99,10 +99,10 @@ const handleUserlogin = async (rawData) => {
             if (isCorrectPassword === true) {
 
                 //test role
-                let GroupWithRole = await GetGroupWithRole(user);
+                let groupWithRole = await GetGroupWithRole(user);
                 let payload = {
                     email: user.email,
-                    GroupWithRole,
+                    groupWithRole,
                     expiresIn: process.env.JWT_EXPIRES_IN
                 }
 
@@ -113,7 +113,7 @@ const handleUserlogin = async (rawData) => {
                     EC: 0,
                     DT: {
                         access_token: token,
-                        GroupWithRole
+                        groupWithRole
                     }
                 }
             }

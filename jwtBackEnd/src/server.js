@@ -37,5 +37,5 @@ app.use((req, res) => {
 })
 
 app.listen(PORT, () => {
-    console.log("JWT is runing on the port ", PORT)
+    console.log("JWT is runing on the port: http://localhost:", PORT)
 })
