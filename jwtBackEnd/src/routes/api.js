@@ -12,18 +12,22 @@ const router = express.Router();
  * @param {*} app - express app
  */
 
-const testMiddleware = (req, res, next) => {
+function checkUser(req, res, next) {
+    const nonSecurePaths = ['/register', '/login'];
+    if (nonSecurePaths.includes(req.path)) return next();
 
-    console.log("calling a middleware")
-    next()
+    //authenticate user
+    next();
 }
 
 const initApiRouters = (app) => {
 
+    router.all('*', checkUserJWT, checkUserPermission);
+
     router.post("/register", apiController.handleRegister);
     router.post("/login", apiController.handlelogin);
 
-    router.get("/user/read", checkUserJWT, checkUserPermission, userControler.readFunc);
+    router.get("/user/read", userControler.readFunc);
     router.post("/user/create", userControler.createFunc)
     router.put("/user/update", userControler.updateFunc)
     router.delete("/user/delete", userControler.deleteFunc)
