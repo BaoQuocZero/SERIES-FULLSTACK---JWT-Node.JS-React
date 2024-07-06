@@ -1,6 +1,6 @@
 import './Users.scss'
 
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { fetchAllUser, deleteUser } from '../../services/userServices';
 import ReactPaginate from 'react-paginate';
 import { toast } from 'react-toastify'
@@ -25,9 +25,11 @@ const Users = (props) => {
 
     useEffect(() => {
         fetchUsers()
+
     }, [currentPage])
 
     const fetchUsers = async () => {
+
         let response = await fetchAllUser(currentPage, currentLimit)
         if (response && response.EC === 0) {
             setTotalPages(response.DT.totalPages)
