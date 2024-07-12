@@ -32,7 +32,7 @@ const veryfyToken = (token) => {
 
 const checkUserJWT = (req, res, next) => {
 
-    if (nonSecurePaths.includes(req.path)) return next();
+    if (nonSecurePaths.includes(req.path) || req.path === '/account') return next();
 
     let cookies = req.cookies;
     if (cookies && cookies.jwt) {

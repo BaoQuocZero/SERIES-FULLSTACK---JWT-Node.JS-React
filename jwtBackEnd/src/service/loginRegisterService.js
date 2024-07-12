@@ -103,6 +103,7 @@ const handleUserlogin = async (rawData) => {
                 let payload = {
                     email: user.email,
                     groupWithRole,
+                    username: user.username,
                     expiresIn: process.env.JWT_EXPIRES_IN
                 }
 

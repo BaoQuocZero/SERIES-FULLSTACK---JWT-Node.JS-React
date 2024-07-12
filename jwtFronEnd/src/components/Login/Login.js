@@ -46,7 +46,6 @@ const Login = () => {
 
         if (response && +response.EC === 0) {
             //success
-            console.log(">>>>>>", response)
             let groupWithRoles = response.DT.groupWithRole;
             let email = response.DT.email;
             let username = response.DT.username;
@@ -57,12 +56,10 @@ const Login = () => {
                 token,
                 account: { groupWithRoles, email, username }
             }
-            sessionStorage.setItem("account", JSON.stringify(data));
 
             loginContext(data)
 
             history.push('/users')
-            // window.location.reload();
         }
 
         if (response && +response.EC !== 0) {
@@ -78,14 +75,6 @@ const Login = () => {
             hanleLogin();
         }
     }
-
-    useEffect(() => {
-        let session = sessionStorage.getItem("account");
-        if (session) {
-            history.push("/")
-            window.location.reload()
-        }
-    }, [])
 
     return (
         <div className='login-container '>
