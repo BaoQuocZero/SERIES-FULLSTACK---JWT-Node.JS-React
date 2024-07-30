@@ -40,6 +40,7 @@ const checkUserJWT = (req, res, next) => {
         let decoded = veryfyToken(token)
         if (decoded) {
             req.user = decoded
+            req.token = token
             next()
         } else {
             return res.status(401).json({

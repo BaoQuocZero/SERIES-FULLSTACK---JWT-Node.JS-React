@@ -6,7 +6,6 @@ import { UserContext } from "../context/UserContext";
 
 const PrivateRouter = (props) => {
 
-    let history = useHistory();
     const { user } = useContext(UserContext);
 
     if (user && user.isAuthenticated === true) {
