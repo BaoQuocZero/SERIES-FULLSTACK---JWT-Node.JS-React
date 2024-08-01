@@ -2,7 +2,7 @@ import userApiService from '../service/userApiService'
 
 const readFunc = async (req, res) => {
     try {
-        console.log('req.user   : ', req.user)
+        // console.log('req.user   : ', req.user)
 
         if (req.query.page && req.query.limit) {
             let page = req.query.page;
@@ -89,7 +89,7 @@ const deleteFunc = async (req, res) => {
 
 const getUserAccount = async (req, res) => {
     try {
-        console.log('check user   : ', req.user)
+        // console.log('check user   : ', req.user)
         return res.status(200).json({
             EM: 'ok', //error mesage
             EC: 0, //error code

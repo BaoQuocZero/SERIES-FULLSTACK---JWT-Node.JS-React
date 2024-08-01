@@ -19,4 +19,5 @@
 - npm install --save-exact font-awesome@4.7.0
 
 - npm install --save-exact jsonwebtoken@8.5.1 cookie-parser@1.4.6
+- npm i react-loader-spinner
 
