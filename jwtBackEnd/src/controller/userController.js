@@ -88,28 +88,28 @@ const deleteFunc = async (req, res) => {
 }
 
 const getUserAccount = async (req, res) => {
-    // try {
-    console.log('check user   : ', req.user)
-    return res.status(200).json({
-        EM: 'ok', //error mesage
-        EC: 0, //error code
-        DT:
-        {
-            access_token: req.token,
-            groupWithRole: req.user.groupWithRole,
-            email: req.user.email,
-            username: req.user.username
-        } //data
-    })
+    try {
+        console.log('check user   : ', req.user)
+        return res.status(200).json({
+            EM: 'ok', //error mesage
+            EC: 0, //error code
+            DT:
+            {
+                access_token: req.token,
+                groupWithRole: req.user.groupWithRole,
+                email: req.user.email,
+                username: req.user.username
+            } //data
+        })
 
-    // } catch (error) {
-    //     console.log(error)
-    //     return res.status(500).json({
-    //         EM: "error from server", //error mesage
-    //         EC: -1, //error code
-    //         DT: "" //data
-    //     })
-    // }
+    } catch (error) {
+        console.log(error)
+        return res.status(500).json({
+            EM: "error from server", //error mesage
+            EC: "-1", //error code
+            DT: "" //data
+        })
+    }
 }
 
 module.exports = {
